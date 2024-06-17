@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using CodeMonkey;
+using CodeMonkey.Utils;
 
 public class LevelGrid : MonoBehaviour
 {
@@ -42,7 +43,7 @@ public class LevelGrid : MonoBehaviour
         {
             Object.Destroy(foodGameObject);
             SpawnFood();
-            //GameHandler.AddScore();
+            GameHandler.AddScore();
             CMDebug.TextPopupMouse("Snake Ate Food!");
             return true;
         }
