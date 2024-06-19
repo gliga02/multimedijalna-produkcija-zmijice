@@ -14,7 +14,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CodeMonkey.Utils {
+namespace CodeMonkey {
 
     /*
      * Executes a Function periodically
@@ -94,11 +94,9 @@ namespace CodeMonkey.Utils {
 
 
         public static void RemoveTimer(FunctionPeriodic funcTimer) {
-            InitIfNeeded();
             funcList.Remove(funcTimer);
         }
         public static void StopTimer(string _name) {
-            InitIfNeeded();
             for (int i = 0; i < funcList.Count; i++) {
                 if (funcList[i].functionName == _name) {
                     funcList[i].DestroySelf();
@@ -107,7 +105,6 @@ namespace CodeMonkey.Utils {
             }
         }
         public static void StopAllFunc(string _name) {
-            InitIfNeeded();
             for (int i = 0; i < funcList.Count; i++) {
                 if (funcList[i].functionName == _name) {
                     funcList[i].DestroySelf();
@@ -116,7 +113,6 @@ namespace CodeMonkey.Utils {
             }
         }
         public static bool IsFuncActive(string name) {
-            InitIfNeeded();
             for (int i = 0; i < funcList.Count; i++) {
                 if (funcList[i].functionName == name) {
                     return true;
@@ -146,20 +142,11 @@ namespace CodeMonkey.Utils {
             this.useUnscaledDeltaTime = useUnscaledDeltaTime;
             baseTimer = timer;
         }
-
         public void SkipTimerTo(float timer) {
             this.timer = timer;
         }
 
-        public void SetBaseTimer(float baseTimer) {
-            this.baseTimer = baseTimer;
-        }
-
-        public float GetBaseTimer() {
-            return baseTimer;
-        }
-
-        private void Update() {
+        void Update() {
             if (useUnscaledDeltaTime) {
                 timer -= Time.unscaledDeltaTime;
             } else {
@@ -176,7 +163,6 @@ namespace CodeMonkey.Utils {
                 }
             }
         }
-
         public void DestroySelf() {
             RemoveTimer(this);
             if (gameObject != null) {

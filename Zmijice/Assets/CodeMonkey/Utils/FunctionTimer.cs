@@ -14,7 +14,7 @@ using System;
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace CodeMonkey.Utils {
+namespace CodeMonkey {
 
     /*
      * Triggers a Action after a certain time 
@@ -51,15 +51,12 @@ namespace CodeMonkey.Utils {
         public static FunctionTimer Create(Action action, float timer) {
             return Create(action, timer, "", false, false);
         }
-
         public static FunctionTimer Create(Action action, float timer, string functionName) {
             return Create(action, timer, functionName, false, false);
         }
-
         public static FunctionTimer Create(Action action, float timer, string functionName, bool useUnscaledDeltaTime) {
             return Create(action, timer, functionName, useUnscaledDeltaTime, false);
         }
-
         public static FunctionTimer Create(Action action, float timer, string functionName, bool useUnscaledDeltaTime, bool stopAllWithSameName) {
             InitIfNeeded();
 
@@ -75,14 +72,10 @@ namespace CodeMonkey.Utils {
 
             return funcTimer;
         }
-
         public static void RemoveTimer(FunctionTimer funcTimer) {
-            InitIfNeeded();
             timerList.Remove(funcTimer);
         }
-
         public static void StopAllTimersWithName(string functionName) {
-            InitIfNeeded();
             for (int i = 0; i < timerList.Count; i++) {
                 if (timerList[i].functionName == functionName) {
                     timerList[i].DestroySelf();
@@ -90,9 +83,7 @@ namespace CodeMonkey.Utils {
                 }
             }
         }
-
         public static void StopFirstTimerWithName(string functionName) {
-            InitIfNeeded();
             for (int i = 0; i < timerList.Count; i++) {
                 if (timerList[i].functionName == functionName) {
                     timerList[i].DestroySelf();
@@ -134,7 +125,6 @@ namespace CodeMonkey.Utils {
                 DestroySelf();
             }
         }
-
         private void DestroySelf() {
             RemoveTimer(this);
             if (gameObject != null) {
@@ -158,17 +148,13 @@ namespace CodeMonkey.Utils {
                 this.timer = timer;
             }
 
-            public bool Update() {
-                return Update(Time.deltaTime);
+            public void Update() {
+                Update(Time.deltaTime);
             }
-
-            public bool Update(float deltaTime) {
+            public void Update(float deltaTime) {
                 timer -= deltaTime;
                 if (timer <= 0) {
                     callback();
-                    return true;
-                } else {
-                    return false;
                 }
             }
         }
@@ -177,7 +163,5 @@ namespace CodeMonkey.Utils {
         public static FunctionTimerObject CreateObject(Action callback, float timer) {
             return new FunctionTimerObject(callback, timer);
         }
-
     }
-
 }
