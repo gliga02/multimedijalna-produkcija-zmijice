@@ -33,26 +33,26 @@ public class GameHandler : MonoBehaviour {
         //SpriteRenderer snakeSpriteRenderer = snakeHeadGameObject.AddComponent<SpriteRenderer>();
         //snakeSpriteRenderer.sprite = GameAssets.i.snakeHeadSprite;
 
-        CMDebug.ButtonUI(Vector2.zero, "Reload Scene", () =>
-        {
-            Loader.Load(Loader.Scene.GameScene);
-        });
+        // CMDebug.ButtonUI(Vector2.zero, "Reload Scene", () =>
+        // {
+        //     Loader.Load(Loader.Scene.GameScene);
+        // });
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (IsGamePaused())
-            {
-               // GameHandler.ResumeGame();
-            }
-            else
-            {
-               // GameHandler.PauseGame();
-            }
-        }
-    }
+    // private void Update()
+    // {
+    //     if (Input.GetKeyDown(KeyCode.Escape))
+    //     {
+    //         if (IsGamePaused())
+    //         {
+    //            // GameHandler.ResumeGame();
+    //         }
+    //         else
+    //         {
+    //            // GameHandler.PauseGame();
+    //         }
+    //     }
+    // }
 
     private static void InitializeStatic()
     {
@@ -69,10 +69,10 @@ public class GameHandler : MonoBehaviour {
         score += 100;
     }
 
-    // public static void SnakeDied()
-    // {
-    //     GameOverWindow.ShowStatic();
-    // }
+    public static void SnakeDied()
+    {
+        GameOverWindow.ShowStatic();
+    }
 
     // public static void ResumeGame()
     // {
@@ -86,9 +86,9 @@ public class GameHandler : MonoBehaviour {
     //     Time.timeScale = 0f;
     // }
 
-    public static bool IsGamePaused()
-    {
-        return Time.timeScale == 0f;
-    }
+    // public static bool IsGamePaused()
+    // {
+    //     return Time.timeScale == 0f;
+    // }
 
 }
