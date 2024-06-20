@@ -1,16 +1,4 @@
-﻿/* 
-    ------------------- Code Monkey -------------------
-
-    Thank you for downloading this package
-    I hope you find it useful in your projects
-    If you have any questions let me know
-    Cheers!
-
-               unitycodemonkey.com
-    --------------------------------------------------
- */
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using CodeMonkey;
@@ -73,21 +61,25 @@ public class Snake : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.UpArrow)) {
             if (gridMoveDirection != Direction.Down) {
                 gridMoveDirection = Direction.Up;
+                SoundManager.PlayMoveSound();
             }
         }
         if (Input.GetKeyDown(KeyCode.DownArrow)) {
             if (gridMoveDirection != Direction.Up) {
                 gridMoveDirection = Direction.Down;
+                SoundManager.PlayMoveSound();
             }
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow)) {
             if (gridMoveDirection != Direction.Right) {
                 gridMoveDirection = Direction.Left;
+                SoundManager.PlayMoveSound();
             }
         }
         if (Input.GetKeyDown(KeyCode.RightArrow)) {
             if (gridMoveDirection != Direction.Left) {
                 gridMoveDirection = Direction.Right;
+                SoundManager.PlayMoveSound();
             }
         }
     }
@@ -96,6 +88,8 @@ public class Snake : MonoBehaviour {
         gridMoveTimer += Time.deltaTime;
         if (gridMoveTimer >= gridMoveTimerMax) {
             gridMoveTimer -= gridMoveTimerMax;
+
+            
 
             SnakeMovePosition previousSnakeMovePosition = null;
             if (snakeMovePositionList.Count > 0) {
@@ -138,6 +132,7 @@ public class Snake : MonoBehaviour {
                     //CMDebug.TextPopup("DEAD!", transform.position);
                     state = State.Dead;
                     GameHandler.SnakeDied();
+                    SoundManager.PlayDieSound();
                 }
             }
 
